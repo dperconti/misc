@@ -6,6 +6,8 @@
 # something=='http://the.url.com/thing.dmg'
 # This script will download it
 #
+# If the URL is in double quotes, a browser will open that link
+#
 # Usage
 # $ easyInstall [app requirements file]
 # 
