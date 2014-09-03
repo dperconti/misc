@@ -1,7 +1,16 @@
 #!/bin/bash
 
+# Downloads and install a .dmg from a file containing URL's
+#
+# Usage
+# $ easyInstall [app requirements file]
+# 
+# For example, for installing all the apps in appReq.dgp
+# $ dmginstall appReq.dgp
+#
+
 if [[ $# -lt 1 ]]; then
-  echo "Usage: dmginstall [requirements file]"
+  echo "Usage: easyInstall [requirements file]"
   exit 1
 fi
 
