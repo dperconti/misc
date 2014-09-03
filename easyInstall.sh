@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Downloads and install a .dmg from a file containing URL's
+# Example: appReq.dgp
+# As long as the .dmg url is inside single quotes, eg:
+# something=='http://the.url.com/thing.dmg'
+# This script will download it
 #
 # Usage
 # $ easyInstall [app requirements file]
@@ -40,6 +44,11 @@ getDMGs() {
 	echo "Done!"
 }
 
+openBrowser() {
+	echo "Opening Browser - $1"
+	python -mwebbrowser "$1"
+}
+
 
 while read line
 do
@@ -48,6 +57,11 @@ do
 	IFS="'" read x whatiwant y <<< "$in"
 	if [ -n "$whatiwant" ]; then
     	getDMGs "$whatiwant"
+	fi
+
+	IFS="\"" read x theBrowserLink y <<< "$in"
+	if [ -n "$theBrowserLink" ]; then
+    	openBrowser "$theBrowserLink"
 	fi
 	     
 done < $1

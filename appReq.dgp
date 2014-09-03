@@ -1,6 +1,7 @@
 ## Keep track of apps in case of a compytron move
 
 ## DMG
+## USE SINGLE QUOTES
 
 DiffMerge=='http://download-us.sourcegear.com/DiffMerge/4.2.0/DiffMerge.4.2.0.697.intel.stable.dmg'
 Chrome=='https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
@@ -17,6 +18,7 @@ Wireshark=='http://wiresharkdownloads.riverbed.com/wireshark/osx/Wireshark%201.1
 XCode=='https://developer.apple.com/devcenter/download.action?path=/Developer_Tools/xcode_6_beta_7_apzr94/xcode_6_beta_7.dmg'
 
 ## non-DMG
+## USE DOUBLE QUOTES ##
 Flycut=="https://itunes.apple.com/us/app/flycut-clipboard-manager/id442160987?mt=12"
 Dropbox=="https:www.dropbox.com/downloading?os=mac"
 Flux=="https://justgetflux.com/dlmac.html"
