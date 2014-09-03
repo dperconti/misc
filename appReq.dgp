@@ -1,0 +1,23 @@
+## Keep track of apps in case of a compytron move
+
+## DMG
+
+DiffMerge=='http://download-us.sourcegear.com/DiffMerge/4.2.0/DiffMerge.4.2.0.697.intel.stable.dmg'
+Chrome=='https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg'
+Drive=='https://dl.google.com/drive/installgoogledrive.dmg'
+Intellij=='http://download.jetbrains.com/idea/ideaIC-13.1.4b.dmg'
+LICEcap=='http://www.cockos.com/licecap/licecap124.dmg'
+Mailbox=='https://download.mailboxapp.com/Mailbox-Beta-0.3.8.dmg'
+Reflector=='http://download.airsquirrels.com/Reflector/Mac/Reflector.dmg'
+Skype=='http://download.skype.com/macosx/Skype_6.19.0.450.dmg'
+Sublime=='http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203065.dmg'
+Tor=='https://www.torproject.org/dist/torbrowser/3.6.4/TorBrowser-3.6.4-osx32_en-US.dmg'
+VirtualBox=='http://download.virtualbox.org/virtualbox/4.3.14/VirtualBox-4.3.14-95030-OSX.dmg'
+Wireshark=='http://wiresharkdownloads.riverbed.com/wireshark/osx/Wireshark%201.12.0%20Intel%2064.dmg'
+XCode=='https://developer.apple.com/devcenter/download.action?path=/Developer_Tools/xcode_6_beta_7_apzr94/xcode_6_beta_7.dmg'
+
+## non-DMG
+Flycut=="https://itunes.apple.com/us/app/flycut-clipboard-manager/id442160987?mt=12"
+Dropbox=="https:www.dropbox.com/downloading?os=mac"
+Flux=="https://justgetflux.com/dlmac.html"
+
