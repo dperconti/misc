@@ -37,7 +37,7 @@ dp_smaller_than=160
 if [ $COLUMNS -lt $dp_smaller_than ]
 then
     for i in {1..$COLUMNS}; do; echo -n "="; done;
-    rintf "%*s\n" $(((${#WELCOME}+$COLUMNS)/2)) "$WELCOME"
+    printf "%*s\n" $(((${#WELCOME}+$COLUMNS)/2)) "$WELCOME"
     printf "%*s\n" $(((${#VERSE}+$COLUMNS)/2)) "$VERSE"
     for i in {1..$COLUMNS}; do; echo -n "="; done;
 else
@@ -78,12 +78,6 @@ else
     printf "%*s\n" $(((${#VERSE}+$COLUMNS)/2)) "$VERSE"
     for i in {1..$COLUMNS}; do; echo -n "="; done;
 fi
-
-
-
-
-
-
 
  # Path to your oh-my-zsh configuration.
  ZSH=$HOME/.oh-my-zsh
@@ -261,5 +255,4 @@ alias myinet="ifconfig | grep 'inet ' | grep '172' | awk '{print $2}'"      # in
         #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
         echo
     }
-
 
