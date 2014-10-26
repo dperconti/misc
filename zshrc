@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 COLUMNS=`tput cols` export COLUMNS # Get screen width.
@@ -148,19 +149,30 @@ fi
  # Hide the user@hostname information
  DEFAULT_USER=donatoperconti
 
- # Customize to your needs...
- alias goadmin="ssh dperconti@admin-1.prod.urbanairship.com"
+#   -------------------------------
+#   1.  ENVIRONMENT CONFIGURATION
+#   -------------------------------
 
- # Custom Functions
+# Urban Airship
+    alias goadmin="ssh dperconti@admin-1.prod.urbanairship.com"
+    alias goworker4="ssh dperconti@worker-4.prod.urbanairship.com"
+
+# Developer Short Cuts
+    alias swift="lldb --repl"
+    alias scala="scala"
+    alias python="python"
+    alias sourceit="clear; source ~/.bash_profile"
+
+#   ------------------------------------------------------------
+# Custom Functions
+#   ------------------------------------------------------------
+
  goscp()
  {
      scp dperconti@admin-1.prod.urbanairship.com:/home/dperconti/$1 ~/Desktop/
  }
 
-#   -------------------------------
-#   1.  ENVIRONMENT CONFIGURATION
-#   -------------------------------
-
+#   ------------------------------------------------------------
 #   Set Paths
 #   ------------------------------------------------------------
     export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH:$HOME/.rvm/bin
@@ -182,7 +194,6 @@ fi
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
 #   -----------------------------
-
     alias cp='cp -iv'                           # Preferred 'cp' implementation
     alias mv='mv -iv'                           # Preferred 'mv' implementation
     alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
@@ -198,6 +209,7 @@ fi
     alias .6='cd ../../../../../../'            # Go back 6 directory levels
     alias carbon='python /opt/graphite/bin/carbon-cache.py'
     alias graphite-web='python /opt/graphite/bin/run-graphite-devel-server.py /opt/graphite'
+    alias Desktop="cd ~/Desktop"
 
 #   -------------------------------
 #   3.  FILE AND FOLDER MANAGEMENT
@@ -230,17 +242,15 @@ fi
 #   6.  NETWORKING
 #   ---------------------------
 
-alias myip='curl ip.appspot.com'                                            # myip:         Public facing IP Address
-alias netCons='lsof -i'                                                     # netCons:      Show all open TCP/IP sockets
-alias flushDNS='dscacheutil -flushcache'                                    # flushDNS:     Flush out the DNS Cache
-alias lsock='sudo /usr/sbin/lsof -i -P'                                     # lsock:        Display open sockets
-alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'                           # lsockU:       Display only open UDP sockets
-alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'                           # lsockT:       Display only open TCP sockets
-alias ipInfo0='ipconfig getpacket en0'                                      # ipInfo0:      Get info on connections for en0
-alias ipInfo1='ipconfig getpacket en1'                                      # ipInfo1:      Get info on connections for en1
-alias openPorts='sudo lsof -i | grep LISTEN'                                # openPorts:    All listening connections
-alias showBlocked='sudo ipfw list'                                          # showBlocked:  All ipfw rules inc/ blocked IPs
-alias myinet="ifconfig | grep 'inet ' | grep '172' | awk '{print $2}'"      # inet:         Show inet Address
+alias netCons='lsof -i'                                            # netCons:      Show all open TCP/IP sockets
+alias flushDNS='dscacheutil -flushcache'                           # flushDNS:     Flush out the DNS Cache
+alias lsock='sudo /usr/sbin/lsof -i -P'                            # lsock:        Display open sockets
+alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'                  # lsockU:       Display only open UDP sockets
+alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'                  # lsockT:       Display only open TCP sockets
+alias ipInfo0='ifconfig en0'                                       # ipInfo0:      Get info on connections for en0
+alias ipInfo1='ifconfig en1'                                       # ipInfo1:      Get info on connections for en1
+alias openPorts='sudo lsof -i | grep LISTEN'                       # openPorts:    All listening connections
+alias showBlocked='sudo ipfw list'                                 # showBlocked:  All ipfw rules inc/ blocked IPs
 
 #   ii:  display useful host related informaton
 #   -------------------------------------------------------------------
