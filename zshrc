@@ -89,7 +89,8 @@ fi
  # export PATH=$M2:$PATH
 
  # Java Virtual Machine
- export JAVA_HOME=$(/usr/libexec/java_home)
+ # export JAVA_HOME=$(/usr/libexec/java_home)
+ export JAVA_HOME=`/usr/libexec/java_home -v 1.6`
  export PATH=$PATH:$JAVA_HOME/bin
 
  # Akka Stuff
@@ -159,8 +160,6 @@ fi
 
 # Developer Short Cuts
     alias swift="lldb --repl"
-    alias scala="scala"
-    alias python="python"
     alias sourceit="clear; source ~/.bash_profile"
 
 #   ------------------------------------------------------------
@@ -177,7 +176,7 @@ fi
 #   ------------------------------------------------------------
     export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH:$HOME/.rvm/bin
     export PIP_NO_INDEX=1
-    export PIP_FIND_LINKS=http://pulp.prod.urbanairship.com/repos/python-packages/
+    #export PIP_FIND_LINKS=http://pulp.prod.urbanairship.com/repos/python-packages/
     export PATH=/usr/local/bin:$PATH
 
     # DEV Quicklink
