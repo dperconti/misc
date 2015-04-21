@@ -80,6 +80,30 @@ else
     for i in {1..$COLUMNS}; do; echo -n "="; done;
 fi
 
+
+#   ------------------------------------------------------------
+#   Set Paths
+#   ------------------------------------------------------------
+    export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+    #export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH:$HOME/.rvm/bin
+    export PIP_NO_INDEX=1
+    export PIP_FIND_LINKS=http://pulp.prod.urbanairship.com/repos/python-packages/
+    export PATH=/usr/local/bin:$PATH
+
+    # DEV Quicklink
+    export DEV=/Users/donatoperconti/Documents/dev/
+
+    ## Airship / Vagrant Junk
+    export CHEF_PATH=/Users/donatoperconti/Documents/dev/UASecurity/UA_Airship/chef_configs
+    export AIRSHIP_PATH=/Users/donatoperconti/Documents/dev/UASecurity/UA_Airship/airship
+    export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
+
+    export CPPFLAGS=-Qunused-arguments
+    export CFLAGS=-Qunused-arguments
+
+    # Airship Vagrant QUICKLINK
+    export AIRSHIP_VM=/Users/donatoperconti/Documents/dev/caseWork/airship_VM
+
  # Path to your oh-my-zsh configuration.
  ZSH=$HOME/.oh-my-zsh
 
@@ -92,6 +116,21 @@ fi
  # export JAVA_HOME=$(/usr/libexec/java_home)
  export JAVA_HOME=`/usr/libexec/java_home`
  export PATH=$PATH:$JAVA_HOME/bin
+
+ function setjdk() {
+  if [ $# -ne 0 ]; then
+   removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+   if [ -n "${JAVA_HOME+x}" ]; then
+    removeFromPath $JAVA_HOME
+   fi
+   export JAVA_HOME=`/usr/libexec/java_home -v $@`
+   export PATH=$JAVA_HOME/bin:$PATH
+  fi
+ }
+ function removeFromPath() {
+  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+ }
+setjdk 1.7
 
  # Akka Stuff
  export AKKA_HOME=/Users/donatoperconti/tools/akka-2.3.4
@@ -157,10 +196,21 @@ fi
 # Urban Airship
     alias goadmin="ssh dperconti@admin-1.prod.urbanairship.com"
     alias goworker4="ssh dperconti@worker-4.prod.urbanairship.com"
-
-# Developer Short Cuts
-    alias swift="lldb --repl"
-    alias sourceit="clear; source ~/.bash_profile"
+    source /usr/local/bin/virtualenvwrapper.sh
+    
+    if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
+        source /usr/local/bin/virtualenvwrapper.sh
+        # set where virutal environments will live
+        export WORKON_HOME=$HOME/.virtualenvs
+        # ensure all new environments are isolated from the site-packages directory
+        export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+        # use the same directory for virtualenvs as virtualenvwrapper
+        export PIP_VIRTUALENV_BASE=$WORKON_HOME
+        # makes pip detect an active virtualenv and install to it
+        export PIP_RESPECT_VIRTUALENV=true
+    else
+        echo "WARNING: Can't find virtualenvwrapper.sh"
+    fi
 
 #   ------------------------------------------------------------
 # Custom Functions
@@ -171,24 +221,11 @@ fi
      scp dperconti@admin-1.prod.urbanairship.com:/home/dperconti/$1 ~/Desktop/
  }
 
-#   ------------------------------------------------------------
-#   Set Paths
-#   ------------------------------------------------------------
-    export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH:$HOME/.rvm/bin
-    export PIP_NO_INDEX=1
-    #export PIP_FIND_LINKS=http://pulp.prod.urbanairship.com/repos/python-packages/
-    export PATH=/usr/local/bin:$PATH
+  goscpworker4()
+ {
+     scp dperconti@worker-4.prod.urbanairship.com:/tmp/$1 ~/Desktop/
+ }
 
-    # DEV Quicklink
-    export DEV=/Users/donatoperconti/Documents/dev/
-
-    ## Airship / Vagrant Junk
-    export AIRSHIP_PATH=/Users/donatoperconti/Documents/dev/caseWork/airship_VM/airship
-    export CHEF_PATH=/Users/donatoperconti/Documents/dev/caseWork/airship_VM/chef_configs
-    export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
-
-    # Airship Vagrant QUICKLINK
-    export AIRSHIP_VM=/Users/donatoperconti/Documents/dev/caseWork/airship_VM
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
@@ -206,9 +243,19 @@ fi
     alias .4='cd ../../../../'                  # Go back 4 directory levels
     alias .5='cd ../../../../../'               # Go back 5 directory levels
     alias .6='cd ../../../../../../'            # Go back 6 directory levels
-    alias carbon='python /opt/graphite/bin/carbon-cache.py'
-    alias graphite-web='python /opt/graphite/bin/run-graphite-devel-server.py /opt/graphite'
+
+#   -----------------------------
+#   2.5 Shortcuts
+#   -----------------------------
     alias Desktop="cd ~/Desktop"
+    alias platform="cd /Users/donatoperconti/Documents/dev/platform"
+    alias goarbiter="cd /Users/donatoperconti/Documents/dev/platform/arbiter && mkvirtualenv arbiter && pip install --pre optcomplete && pip install -r requirements.txt"
+    alias swift="lldb --repl"
+    alias sourceit="cp ~/.zshrc ~/.bash_profile; clear; source ~/.bash_profile"
+    alias clear="sourceit; clear"
+    alias gitClean="git checkout master; git branch | grep -v master | xargs git branch -D; git reset --hard HEAD; git clean -f -d; git pull"
+    alias gitCleanLocal="git reset --hard; git clean -fd"
+    alias curl="/usr/local/Cellar/curl/7.41.0_1/bin/curl"
 
 #   -------------------------------
 #   3.  FILE AND FOLDER MANAGEMENT
@@ -260,7 +307,7 @@ alias showBlocked='sudo ipfw list'                                 # showBlocked
         echo -e "\n${RED}Current date :$NC " ; date
         echo -e "\n${RED}Machine stats :$NC " ; uptime
         echo -e "\n${RED}Current network location :$NC " ; scselect
-        echo -e "\n${RED}Public facing IP Address :$NC " ;myip
+        echo -e "\n${RED}Public facing IP Address :$NC " ; myip
         #echo -e "\n${RED}DNS Configuration:$NC " ; scutil --dns
         echo
     }
