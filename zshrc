@@ -80,15 +80,26 @@ else
     for i in {1..$COLUMNS}; do; echo -n "="; done;
 fi
 
+cd /Users/donatoperconti/Documents/dev/platform/
+
+if [ -f ~/.maven-completion.bash ]; then
+  . ~/.maven-completion.bash
+fi
+
 
 #   ------------------------------------------------------------
 #   Set Paths
 #   ------------------------------------------------------------
-    export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-    #export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$PATH:$HOME/.rvm/bin
-    export PIP_NO_INDEX=1
-    export PIP_FIND_LINKS=http://pulp.prod.urbanairship.com/repos/python-packages/
-    export PATH=/usr/local/bin:$PATH
+    PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
+    export PATH
+
+    # needed for virtualenvwrapper
+    export WORKON_HOME=$HOME/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+
+    # PIP 
+    export PIP_FIND_LINKS=http://packages.prod.urbanairship.com/pulp/python/web/pip/simple/
+    export PIP_TRUSTED_HOST=packages.prod.urbanairship.com
 
     # DEV Quicklink
     export DEV=/Users/donatoperconti/Documents/dev/
@@ -100,9 +111,6 @@ fi
 
     export CPPFLAGS=-Qunused-arguments
     export CFLAGS=-Qunused-arguments
-
-    # Airship Vagrant QUICKLINK
-    export AIRSHIP_VM=/Users/donatoperconti/Documents/dev/caseWork/airship_VM
 
  # Path to your oh-my-zsh configuration.
  ZSH=$HOME/.oh-my-zsh
@@ -194,23 +202,9 @@ setjdk 1.7
 #   -------------------------------
 
 # Urban Airship
-    alias goadmin="ssh dperconti@admin-1.prod.urbanairship.com"
+    alias goadmin="ssh dperconti@admin.prod.urbanairship.com"
     alias goworker4="ssh dperconti@worker-4.prod.urbanairship.com"
-    source /usr/local/bin/virtualenvwrapper.sh
-    
-    if [[ -r /usr/local/bin/virtualenvwrapper.sh ]]; then
-        source /usr/local/bin/virtualenvwrapper.sh
-        # set where virutal environments will live
-        export WORKON_HOME=$HOME/.virtualenvs
-        # ensure all new environments are isolated from the site-packages directory
-        export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-        # use the same directory for virtualenvs as virtualenvwrapper
-        export PIP_VIRTUALENV_BASE=$WORKON_HOME
-        # makes pip detect an active virtualenv and install to it
-        export PIP_RESPECT_VIRTUALENV=true
-    else
-        echo "WARNING: Can't find virtualenvwrapper.sh"
-    fi
+    # alias protoc-2.4=protoc
 
 #   ------------------------------------------------------------
 # Custom Functions
@@ -218,7 +212,7 @@ setjdk 1.7
 
  goscp()
  {
-     scp dperconti@admin-1.prod.urbanairship.com:/home/dperconti/$1 ~/Desktop/
+     scp dperconti@$1:/home/dperconti/$2 ~/Desktop/
  }
 
   goscpworker4()
@@ -226,6 +220,10 @@ setjdk 1.7
      scp dperconti@worker-4.prod.urbanairship.com:/tmp/$1 ~/Desktop/
  }
 
+ sh()
+ {
+     ssh dperconti@$1
+ }
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
@@ -249,13 +247,23 @@ setjdk 1.7
 #   -----------------------------
     alias Desktop="cd ~/Desktop"
     alias platform="cd /Users/donatoperconti/Documents/dev/platform"
-    alias goarbiter="cd /Users/donatoperconti/Documents/dev/platform/arbiter && mkvirtualenv arbiter && pip install --pre optcomplete && pip install -r requirements.txt"
+    alias goarbiter="cd /Users/donatoperconti/Documents/dev/platform/arbiter && mkvirtualenv arbiter2 && pip install --pre optcomplete && pip install -r requirements.txt"
     alias swift="lldb --repl"
     alias sourceit="cp ~/.zshrc ~/.bash_profile; clear; source ~/.bash_profile"
     alias clear="sourceit; clear"
+    alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
+    # alias curl="/usr/local/Cellar/curl/7.41.0_1/bin/curl"
+
+    ## GIT SHORTCUTS
     alias gitClean="git checkout master; git branch | grep -v master | xargs git branch -D; git reset --hard HEAD; git clean -f -d; git pull"
     alias gitCleanLocal="git reset --hard; git clean -fd"
-    alias curl="/usr/local/Cellar/curl/7.41.0_1/bin/curl"
+    alias gitSmash="find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;"
+    gitDelete() {git push origin --delete $1}
+
+    ## Other shortcuts
+    alias checkVPN="openssl x509 -noout -text -in ~/vpn.tblk/client.crt | grep After"
+
+    gitTag() { git checkout tags/$1 }
 
 #   -------------------------------
 #   3.  FILE AND FOLDER MANAGEMENT
