@@ -247,6 +247,7 @@ setjdk 1.7
 #   -----------------------------
     alias Desktop="cd ~/Desktop"
     alias platform="cd /Users/donatoperconti/Documents/dev/platform"
+    alias paylasso="cd /Users/donatoperconti/Documents/dev/paylasso"
     alias goarbiter="cd /Users/donatoperconti/Documents/dev/platform/arbiter && mkvirtualenv arbiter2 && pip install --pre optcomplete && pip install -r requirements.txt"
     alias swift="lldb --repl"
     alias sourceit="cp ~/.zshrc ~/.bash_profile; clear; source ~/.bash_profile"
@@ -263,6 +264,7 @@ setjdk 1.7
     ## Other shortcuts
     alias checkVPN="openssl x509 -noout -text -in ~/vpn.tblk/client.crt | grep After"
 
+    findeps() { grep -ir "<artifactId>$1</artifactId>" --include="pom.xml" . | awk -F/ '{print $2}' | uniq }
     gitTag() { git checkout tags/$1 }
 
 #   -------------------------------
