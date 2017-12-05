@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 COLUMNS=`tput cols` export COLUMNS # Get screen width.
@@ -80,52 +79,27 @@ else
     for i in {1..$COLUMNS}; do; echo -n "="; done;
 fi
 
-cd /Users/donatoperconti/Documents/dev/platform/
-
 if [ -f ~/.maven-completion.bash ]; then
   . ~/.maven-completion.bash
 fi
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/donato/.oh-my-zsh
 
 
 #   ------------------------------------------------------------
 #   Set Paths
 #   ------------------------------------------------------------
-    PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
-    export PATH
+export PATH=/Library/PostgreSQL/10/bin:/opt/chefdk/bin:/usr/local/git/bin:/usr/local/bin:/usr/local/apache-maven-3.5.0/bin:/sbin:$PATH
 
-    # needed for virtualenvwrapper
-    export WORKON_HOME=$HOME/.virtualenvs
-    source /usr/local/bin/virtualenvwrapper.sh
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
 
-    # PIP 
-    export PIP_FIND_LINKS=http://packages.prod.urbanairship.com/pulp/python/web/pip/simple/
-    export PIP_TRUSTED_HOST=packages.prod.urbanairship.com
+# Java Virtual Machine
+export JAVA_HOME=`/usr/libexec/java_home`
+export PATH=$PATH:$JAVA_HOME/bin
 
-    # DEV Quicklink
-    export DEV=/Users/donatoperconti/Documents/dev/
-
-    ## Airship / Vagrant Junk
-    export CHEF_PATH=/Users/donatoperconti/Documents/dev/UASecurity/UA_Airship/chef_configs
-    export AIRSHIP_PATH=/Users/donatoperconti/Documents/dev/UASecurity/UA_Airship/airship
-    export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
-
-    export CPPFLAGS=-Qunused-arguments
-    export CFLAGS=-Qunused-arguments
-
- # Path to your oh-my-zsh configuration.
- ZSH=$HOME/.oh-my-zsh
-
- # Maven Build Stuff
- # export M2_HOME=/usr/local/apache-maven/apache-maven-3.1.1
- # export M2=$M2_HOME/src/bin
- # export PATH=$M2:$PATH
-
- # Java Virtual Machine
- # export JAVA_HOME=$(/usr/libexec/java_home)
- export JAVA_HOME=`/usr/libexec/java_home`
- export PATH=$PATH:$JAVA_HOME/bin
-
- function setjdk() {
+function setjdk() {
   if [ $# -ne 0 ]; then
    removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
    if [ -n "${JAVA_HOME+x}" ]; then
@@ -134,96 +108,39 @@ fi
    export JAVA_HOME=`/usr/libexec/java_home -v $@`
    export PATH=$JAVA_HOME/bin:$PATH
   fi
- }
- function removeFromPath() {
+}
+
+function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
- }
-setjdk 1.7
-
- # Akka Stuff
- export AKKA_HOME=/Users/donatoperconti/tools/akka-2.3.4
- export PATH=$PATH:$AKKA_HOME/bin
-
- # Scala Stuff
- export SCALA_HOME=/Users/donatoperconti/tools/scala-2.11.2
- export PATH=$PATH:$SCALA_HOME/bin
-
- # SBT Stuff
- export SBT_OPTS=-XX:MaxPermSize=256m
-
- #export PATH=$PATH:scala-2.9.1/bin
-
- # Set name of the theme to load.
- # Look in ~/.oh-my-zsh/themes/
- # Optionally, if you set this to "random", it'll load a random theme each
- # time that oh-my-zsh is loaded.
- ZSH_THEME="agnoster"
- # Example aliases
- # alias zshconfig="mate ~/.zshrc"
- # alias ohmyzsh="mate ~/.oh-my-zsh"
-
- # Set to this to use case-sensitive completion
- # CASE_SENSITIVE="true"
-
- # Comment this out to disable bi-weekly auto-update checks
- # DISABLE_AUTO_UPDATE="true"
-
- # Uncomment to change how often before auto-updates occur? (in days)
- # export UPDATE_ZSH_DAYS=13
-
- # Uncomment following line if you want to disable colors in ls
- # DISABLE_LS_COLORS="true"
-
- # Uncomment following line if you want to disable autosetting terminal title.
-  DISABLE_AUTO_TITLE="true"
-
- # Uncomment following line if you want to disable command autocorrection
- # DISABLE_CORRECTION="true"
-
- # Uncomment following line if you want red dots to be displayed while waiting for completion
-  COMPLETION_WAITING_DOTS="true"
-
- # Uncomment following line if you want to disable marking untracked files under
- # VCS as dirty. This makes repository status check for large repositories much,
- # much faster.
- # DISABLE_UNTRACKED_FILES_DIRTY="true"
-
- # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
- # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
- # Example format: plugins=(rails git textmate ruby lighthouse)
- plugins=(git git-extras osx)
- source $ZSH/oh-my-zsh.sh
-
- # Hide the user@hostname information
- DEFAULT_USER=donatoperconti
+}
 
 #   -------------------------------
-#   1.  ENVIRONMENT CONFIGURATION
+#   1.  ENVIRONMENT AND ZSH CONFIGURATION
 #   -------------------------------
 
-# Urban Airship
-    alias goadmin="ssh dperconti@admin.prod.urbanairship.com"
-    alias goworker4="ssh dperconti@worker-4.prod.urbanairship.com"
-    # alias protoc-2.4=protoc
+    POWERLEVEL9K_MODE='awesome-patched'
+    POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+    POWERLEVEL9K_TIME_FORMAT="\UE12E %D{%H:%M:%S}"
+    POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('time' 'status' 'todo' 'context' 'dir' 'vcs' 'virtualenv')
+    POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('nvm' 'rvm' 'load' 'ram_joined' 'battery')
 
-#   ------------------------------------------------------------
-# Custom Functions
-#   ------------------------------------------------------------
+    # Set name of the theme to load.
+    ZSH_THEME=agnoster
 
- goscp()
- {
-     scp dperconti@$1:/home/dperconti/$2 ~/Desktop/
- }
+    # Uncomment following line if you want to disable autosetting terminal title.
+    DISABLE_AUTO_TITLE="true"
 
-  goscpworker4()
- {
-     scp dperconti@worker-4.prod.urbanairship.com:/tmp/$1 ~/Desktop/
- }
+    # Uncomment following line if you want red dots to be displayed while waiting for completion
+    COMPLETION_WAITING_DOTS="true"
 
- sh()
- {
-     ssh dperconti@$1
- }
+    # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+    # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+    # Example format: plugins=(rails git textmate ruby lighthouse)
+    plugins=(git git-extras osx)
+    source $ZSH/oh-my-zsh.sh
+
+    # Hide the user@hostname information
+    DEFAULT_USER=donato
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
@@ -231,7 +148,6 @@ setjdk 1.7
     alias cp='cp -iv'                           # Preferred 'cp' implementation
     alias mv='mv -iv'                           # Preferred 'mv' implementation
     alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
-    alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
     alias less='less -FSRXc'                    # Preferred 'less' implementation
     cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
     alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
@@ -241,37 +157,79 @@ setjdk 1.7
     alias .4='cd ../../../../'                  # Go back 4 directory levels
     alias .5='cd ../../../../../'               # Go back 5 directory levels
     alias .6='cd ../../../../../../'            # Go back 6 directory levels
+    alias grep='grep --color=always'            # Make grep better
+
+    # Listing Files
+
+    alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
+
+    # Flags:
+    #   -G: default colors, different for directories vs. files
+    #   -F: includes a trailing `/` at the end of directory names
+    #   -l: display long format (file types, permissions, number of hard
+    #       links, owner, group, size, last-modified date, and filename)
+    #   -t: sort the list of files by modification time
+    alias l='ls -GF -lt | awk '\''{
+      printf("%-4.4s ", $5);
+      printf("%4s %-3.2d %-5.5s  ", $6, $7, $8);
+      printf("%-7.59s\n", $9);
+    }'\'' | tail +2'  # Remove first line from output (formerly "total")
+
+    alias ls='ls -1 '
+
+    # Grep (case-insensitive)
+    alias lg='l | grep -i'
 
 #   -----------------------------
-#   2.5 Shortcuts
+#   2.5 Shortcuts and Aliases
 #   -----------------------------
+
+    # Shortcuts
     alias Desktop="cd ~/Desktop"
-    alias platform="cd /Users/donatoperconti/Documents/dev/platform"
-    alias paylasso="cd /Users/donatoperconti/Documents/dev/paylasso"
-    alias goarbiter="cd /Users/donatoperconti/Documents/dev/platform/arbiter && mkvirtualenv arbiter2 && pip install --pre optcomplete && pip install -r requirements.txt"
-    alias swift="lldb --repl"
     alias sourceit="cp ~/.zshrc ~/.bash_profile; clear; source ~/.bash_profile"
     alias clear="sourceit; clear"
     alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-    # alias curl="/usr/local/Cellar/curl/7.41.0_1/bin/curl"
 
-    ## GIT SHORTCUTS
-    alias gitClean="git checkout master; git branch | grep -v master | xargs git branch -D; git reset --hard HEAD; git clean -f -d; git pull"
+    # Local Project shortcuts
+    alias runserver='python manage.py runserver'									 # Runserver for django project
+    alias herokurun='heroku local'									               # Heroku local
+
+    ## git shortcuts
     alias gitCleanLocal="git reset --hard; git clean -fd"
     alias gitSmash="find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;"
+    alias gst='git status'      # Git Status
+    alias gc='git commit'       # Git commit
+    alias gco='git checkout'    # Git checkout
+    alias ga='git add'          # Git add
+
+    # Tomcat shortcuts
+    alias tomstart='/Library/Tomcat/bin/startup.sh'       # Start tomcat server
+    alias tomstop='/Library/Tomcat/bin/shutdown.sh'       # Stop tomcat server
+
+    # ZSH shortcuts
+    alias zshconfig="atom ~/.zshrc"
+
+    # Repl starting
+    alias swift="lldb --repl"
+    alias octave="/usr/local/octave/3.8.0/bin/octave-3.8.0; exit;"
+
+    # Other
+    alias addspace="defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type=\"spacer-tile\";}' & killall Dock"   # Adds a space in the menu
+
+#   -----------------------------
+#   2.6 Custom Functions
+#   -----------------------------
+
     gitDelete() {git push origin --delete $1}
-
-    ## Other shortcuts
-    alias checkVPN="openssl x509 -noout -text -in ~/vpn.tblk/client.crt | grep After"
-
-    findeps() { grep -ir "<artifactId>$1</artifactId>" --include="pom.xml" . | awk -F/ '{print $2}' | uniq }
-    gitTag() { git checkout tags/$1 }
+    notify() {
+      osascript -e 'display notification "'$1'" with title "'$2'"'
+    }
 
 #   -------------------------------
 #   3.  FILE AND FOLDER MANAGEMENT
 #   -------------------------------
 
-#   extract:  Extract most know archives with one command
+#   extract:  Extract most known archives with one command
 #   ---------------------------------------------------------
     extract () {
         if [ -f $1 ] ; then
@@ -298,15 +256,15 @@ setjdk 1.7
 #   6.  NETWORKING
 #   ---------------------------
 
-alias netCons='lsof -i'                                            # netCons:      Show all open TCP/IP sockets
-alias flushDNS='dscacheutil -flushcache'                           # flushDNS:     Flush out the DNS Cache
-alias lsock='sudo /usr/sbin/lsof -i -P'                            # lsock:        Display open sockets
-alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'                  # lsockU:       Display only open UDP sockets
-alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'                  # lsockT:       Display only open TCP sockets
-alias ipInfo0='ifconfig en0'                                       # ipInfo0:      Get info on connections for en0
-alias ipInfo1='ifconfig en1'                                       # ipInfo1:      Get info on connections for en1
-alias openPorts='sudo lsof -i | grep LISTEN'                       # openPorts:    All listening connections
-alias showBlocked='sudo ipfw list'                                 # showBlocked:  All ipfw rules inc/ blocked IPs
+    alias netCons='lsof -i'                                            # netCons:      Show all open TCP/IP sockets
+    alias flushDNS='dscacheutil -flushcache'                           # flushDNS:     Flush out the DNS Cache
+    alias lsock='sudo /usr/sbin/lsof -i -P'                            # lsock:        Display open sockets
+    alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'                  # lsockU:       Display only open UDP sockets
+    alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'                  # lsockT:       Display only open TCP sockets
+    alias ipInfo0='ifconfig en0'                                       # ipInfo0:      Get info on connections for en0
+    alias ipInfo1='ifconfig en1'                                       # ipInfo1:      Get info on connections for en1
+    alias openPorts='sudo lsof -i | grep LISTEN'                       # openPorts:    All listening connections
+    alias showBlocked='sudo ipfw list'                                 # showBlocked:  All ipfw rules inc/ blocked IPs
 
 #   ii:  display useful host related informaton
 #   -------------------------------------------------------------------
@@ -322,3 +280,6 @@ alias showBlocked='sudo ipfw list'                                 # showBlocked
         echo
     }
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
