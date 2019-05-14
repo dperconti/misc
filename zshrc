@@ -5,34 +5,6 @@ COLUMNS=`tput cols` export COLUMNS # Get screen width.
 
 WELCOME="WELCOME, DONATO"
 VERSE="If you're worn out in this footrace with men, what makes you think you can race against horses?"
- L_1="        ..,:cloddooddooooddoooddxxdolc:,...                             ..';coxxdo:,.                               ..',;:c:cllloooooooooooodddllc:,..     "
- L_2="    .:loooloool;,'....';::ccc::;:cllclxkxdddooc:,.                   .:x00OOOkxddk000kd:.                  ..';clodkOkxxdoooool:::::;:;'';dkocc;:lx000ko,  "
- L_3="  'dko;'...,ld;    .,dkdl::,..       ,lc;:c:cox00Oxdoc,..           .dWWXo'.'..  ';:dO0O,            ..;loddddolcoxo;.  ..      .:l::cc' .oKk;.  .';:lk0k:."
- L_4=" :XXc  ..';cd:      ;OO'    .,;ccccccokkl:ldxooddooxO0OOOxo:'.       ;OWO, .;'.   .c:...        .,codxxdl:,'',:lol'..;ccclc:cllcc:.      .,ko. .,clc:,;:'. "
- L_5=".dWk' 'll:;,',:cc,  .,,..;c,.  .''''.'''. .;ccoxkxxkkkkkO0KXX0xl;.    oNXo,:0Oc'..c0l.,'   .,:oxxxol:;;;coollll:.   .',,,,,:xx;. .;'     .c0kc::;:k0xlcc'  "
- L_6=" .:c;cdc..;dxo:,.,:'. .lOxc..',cllll::ll:;:ooldkkxc;cddlld0K0XKKXKOo;oXMNxlk0d,'lOOd' .codOKXK0o::c:llldx:.,:::;',;:cllcllclxkko'.::.   'o0klcxkdloOOl,.   "
- L_7="     .;;cdko'..cdxdc...c0o. .,,''.',cc'.'',cdl;;,,'.,:cdkkxxkx:.';lOKNMWKl,''.  ....,lxK0xdl;',coollcc:ll,.:lcoxxkxol,'','..',ll.    ..c0KkdlcoOklc;.      "
- L_8="         ..,:okd;..,dOd;:;.   .;dkOd:. ..''',clodxxkxdo:;,,,,;,. 'dddkxc.  .,.    .::cxc'''.''.':,,:oxxxxxkkolol;'':c;coxOOdc..,.   ,xO0Ko;:cloc'          "
- L_9="            .;l:,cdxo,.;odl' .;0Kd,':loxxk0Okxo:,''..........  .'dOxxc.   .k0;   .lXx. ..;;'','',,..';:;,;cldxxxxxxxkOkdO0dl:.  .cod0Kl;ldxxl.             "
-L_10="              .'clod;',dOo:,';cxKO, 'c:',:lc'..,;;;'.           ...'dKXd'.:kNX:.'cxNXc     .,,........,;,...',;;;okl',cldo;. 'clcx0d;:lodl,'.              "
-L_11="                 .'cdxOk;..;kKkl,....'';dX0;;ol:'.                 ;OWMXl'lko,..,ldx:......     ...        .'cxkkKNo';cl;....'clokkkxc;c:.                 "
-L_12="                    ..,clcloo:.   .',;:lkXx',:..                   .kWWk'.   ..  ... ..  ..                  'dKNWKc,odc;;cl:;;;:cc:;'.                    "
-L_13="                        ......    .coddlc;,,codo.                  .dXNx..',:;'.'::;'   .                     ;0NO;.,oxkdddc.                              "
-L_14="                                ,x0xl:....:0KOdl;.                 .xNNl .;:,.  .''''.  ''                   'OW0;..  .:x0KOkl.                            "
-L_15="                               :KWx..,,;cokxd:. ..                  cXX: .,'...    .,.                       lNK:  .;:;:dX0lcc,                            "
-L_16="                               cNXc':oxdlldl.   ..                  .kWo  .;:l, ..',;.                      .xNo   .;dOOKX0k:                              "
-L_17="                               .oKK0x;';cll:'.   ..                 '0Nl  .',:.  .,od,    ..                .OX:    .:k0KK0d,                              "
-L_18="                                 'oOx:ox:,co:''..cc.                '0No    .c'   .''   ...,'              'OX0l. .;d0K0kc.                                "
-L_19="                                   .';odcod,;l,'oo:cc:,'.           .oWO.   .:.   ..    ':..,.         ...;OWkoOxc:oOxl'                                   "
-L_20="                                      .';cl::,.':'';:c:,.            ,0No. .:l.  ..     ''  .'.       ,loolol;:ol;'..                                      "
-L_21="                                          ....          ..            lNK,  .'                ....     ....                                                "
-L_22="                                                                      .oXx..::'''.                                                                         "
-L_23="                                                                       .dNk'..                                                                             "
-L_24="                                                                        'ONx.                                                                              "
-L_25="                                                                         ;0Xo.                                                                             "
-L_26="                                                                          .dKk.                                                                            "
-L_27="                                                                           .dNx,.                                                                          "
-L_28="                                                                            .','.                                                                          "
 
 dp_smaller_than=160
 if [ $COLUMNS -lt $dp_smaller_than ]
@@ -41,68 +13,32 @@ then
     printf "%*s\n" $(((${#WELCOME}+$COLUMNS)/2)) "$WELCOME"
     printf "%*s\n" $(((${#VERSE}+$COLUMNS)/2)) "$VERSE"
     for i in {1..$COLUMNS}; do; echo -n "="; done;
-else
-    for i in {1..$COLUMNS}; do; echo -n "="; done;
-    printf "%*s\n" $(((${#WELCOME}+$COLUMNS)/2)) "$WELCOME"
-    for i in {1..$COLUMNS}; do; echo -n "="; done;
-
-    printf "%*s\n" $(((${#L_1}+$COLUMNS)/2)) "$L_1"
-    printf "%*s\n" $(((${#L_2}+$COLUMNS)/2)) "$L_2"
-    printf "%*s\n" $(((${#L_3}+$COLUMNS)/2)) "$L_3"
-    printf "%*s\n" $(((${#L_4}+$COLUMNS)/2)) "$L_4"
-    printf "%*s\n" $(((${#L_5}+$COLUMNS)/2)) "$L_5"
-    printf "%*s\n" $(((${#L_6}+$COLUMNS)/2)) "$L_6"
-    printf "%*s\n" $(((${#L_7}+$COLUMNS)/2)) "$L_7"
-    printf "%*s\n" $(((${#L_8}+$COLUMNS)/2)) "$L_8"
-    printf "%*s\n" $(((${#L_9}+$COLUMNS)/2)) "$L_9"
-    printf "%*s\n" $(((${#L_10}+$COLUMNS)/2)) "$L_10"
-    printf "%*s\n" $(((${#L_11}+$COLUMNS)/2)) "$L_11"
-    printf "%*s\n" $(((${#L_12}+$COLUMNS)/2)) "$L_12"
-    printf "%*s\n" $(((${#L_13}+$COLUMNS)/2)) "$L_13"
-    printf "%*s\n" $(((${#L_14}+$COLUMNS)/2)) "$L_14"
-    printf "%*s\n" $(((${#L_15}+$COLUMNS)/2)) "$L_15"
-    printf "%*s\n" $(((${#L_16}+$COLUMNS)/2)) "$L_16"
-    printf "%*s\n" $(((${#L_17}+$COLUMNS)/2)) "$L_17"
-    printf "%*s\n" $(((${#L_18}+$COLUMNS)/2)) "$L_18"
-    printf "%*s\n" $(((${#L_19}+$COLUMNS)/2)) "$L_19"
-    printf "%*s\n" $(((${#L_20}+$COLUMNS)/2)) "$L_20"
-    printf "%*s\n" $(((${#L_21}+$COLUMNS)/2)) "$L_21"
-    printf "%*s\n" $(((${#L_22}+$COLUMNS)/2)) "$L_22"
-    printf "%*s\n" $(((${#L_23}+$COLUMNS)/2)) "$L_23"
-    printf "%*s\n" $(((${#L_24}+$COLUMNS)/2)) "$L_24"
-    printf "%*s\n" $(((${#L_25}+$COLUMNS)/2)) "$L_25"
-    printf "%*s\n" $(((${#L_26}+$COLUMNS)/2)) "$L_26"
-    printf "%*s\n" $(((${#L_27}+$COLUMNS)/2)) "$L_27"
-    printf "%*s\n" $(((${#L_28}+$COLUMNS)/2)) "$L_28"
-
-    for i in {1..$COLUMNS}; do; echo -n "="; done;
-    printf "%*s\n" $(((${#VERSE}+$COLUMNS)/2)) "$VERSE"
-    for i in {1..$COLUMNS}; do; echo -n "="; done;
-fi
-
-cd /Users/donato/Documents/
-
-if [ -f ~/.maven-completion.bash ]; then
-  . ~/.maven-completion.bash
 fi
 
 # using color
 export CLICOLOR=1
+
 # \h:\W \u\$
 export PS1='\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] '
-# grep
 
+# grep
 alias grep='grep --color=always'
 
+#   ------------------------------------------------------------
+#   Virtualenv
+#   ------------------------------------------------------------
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+eval "$(pyenv init -)" # Sets python to use pyenv
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 
 #   ------------------------------------------------------------
 #   Set Paths
 #   ------------------------------------------------------------
 # Bin
 export PATH=/usr/local/git/bin:/usr/local/bin:/opt/X11/bin/:$PATH
-
-# DEV Quicklink
-export DEV=/Users/donato/Documents/dev/
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -125,11 +61,12 @@ ZSH=$HOME/.oh-my-zsh
  function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
  }
-setjdk 1.8
+setjdk 1.8.0_151
 
 POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_PYTHON_ICON='\U1F40D'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_TIME_FORMAT="\UE12E %D{%H:%M:%S}"
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('time' 'status' 'todo' 'context' 'dir' 'vcs' 'virtualenv')
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('nvm' 'rvm' 'load' 'ram_joined' 'battery')
 
@@ -176,7 +113,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('nvm' 'rvm' 'load' 'ram_joined' 'battery')
  source $ZSH/oh-my-zsh.sh
 
  # Hide the user@hostname information
- DEFAULT_USER=donato
+ DEFAULT_USER="$(whoami)"
 
 #   -------------------------------
 #   1.  ENVIRONMENT CONFIGURATION
@@ -204,30 +141,50 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('nvm' 'rvm' 'load' 'ram_joined' 'battery')
     alias .5='cd ../../../../../'               # Go back 5 directory levels
     alias .6='cd ../../../../../../'            # Go back 6 directory levels
 
+    alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'      # Hide hidden files
+    alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'     # Show hidden files
+    alias fixBear='sudo rm /Applications/Bear.app/Contents/Resources/Default\ App\ Theme.theme; sudo rm /Applications/Bear.app/Contents/Resources/Default\ Text\ Theme.theme; sudo mv /Applications/Bear.app/Contents/Resources/Cobalt\ App\ Theme.theme /Applications/Bear.app/Contents/Resources/Default\ App\ Theme.theme; sudo mv /Applications/Bear.app/Contents/Resources/Cobalt\ Text\ Theme.theme /Applications/Bear.app/Contents/Resources/Default\ Text\ Theme.theme'
+    alias fixSlack='cat /Users/dperconti/slack_css.txt | sudo tee -a /Applications/Slack.app/Contents/Resources/app.asar.unpacked/src/static/ssb-interop.js'
     alias addspace="defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type=\"spacer-tile\";}' & killall Dock"
+    alias mfa="oathtool -v --totp -b Z7OCMXCKTTUU7RATYTGVGOI2RSLTSMSZR6Y3Q3NBARY6THC2PFNCAEAIEL6TATX3 | tail -1 | pbcopy"
+
+
+#   -----------------------------
+#   2.5 NPM
+#   -----------------------------
+
+export PATH=~/.npm-global/bin:$PATH
 
 #   -----------------------------
 #   2.5 Shortcuts
 #   -----------------------------
     alias Desktop="cd ~/Desktop"
-    alias paylasso="cd /Users/donato/Documents/dev/paylasso"
     alias swift="lldb --repl"
     alias sourceit="cp ~/.zshrc ~/.bash_profile; clear; source ~/.bash_profile"
     alias clear="sourceit; clear"
     alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
-    alias runserver='python manage.py runserver'                                                                    # Runserver for django project
-    alias herokurun='heroku local'                                                                                  # Runserver for django project
-    alias psql
-    alias octave="/usr/local/octave/3.8.0/bin/octave-3.8.0; exit;"
-    alias 
-    ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/sublime                   # open sublime 
+    alias ipy='python3 -m IPython'
+    alias ipy2='python3 -m IPython'
 
     ## GIT SHORTCUTS
-    alias gitClean="git fetch --all;git reset --hard origin/master;"                                                # Git clean repo and pull master
+    alias gitClean="git fetch --all && git reset --hard origin/master;"
     alias gitCleanLocal="git reset --hard; git clean -fd"
     alias gitSmash="find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;"
-    alias cg="spa=$(git rev-parse --show-toplevel); cd $spa"                                                        # cd's into the git root directory
     gitDelete() {git push origin --delete $1}
+    gs() {
+        git reset $(git merge-base master $(git branch | grep \* | cut -d ' ' -f2)); git add -A
+    }
+    gi() {
+        git rm -r --cached .; git add .; git commit -m "fixed untracked files"
+    }
+
+    ## pip shortcuts
+    alias pipClean="pip freeze | xargs pip uninstall -y"
+
+    ## Random 
+    alias address="echo '3111 107th Pl SE, Bellevue, WA 98004' | pbcopy"
+    alias ipython="python -m IPython"
+    alias ipython3="python3 -m IPython"
 
 #   -------------------------------
 #   3.  FILE AND FOLDER MANAGEMENT
@@ -284,10 +241,8 @@ alias showBlocked='sudo ipfw list'                                 # showBlocked
         echo
     }
 
+# export YVM_DIR=/Users/dperconti/.yvm
+# [ -r $YVM_DIR/yvm.sh ] && source $YVM_DIR/yvm.sh
 
-alias zappashell='docker run -ti -e AWS_PROFILE=zappa -v $(pwd):/var/task -v ~/.aws/:/root/.aws  --rm myzappa'
-alias zappashell >> ~/.bash_profile
-alias zappashell2='docker run -ti -e AWS_PROFILE=$AWS_PROFILE -v $(pwd):/var/task -v ~/.aws/:/root/.aws  --rm lambci/lambda:build-python2.7 bash'
-alias zappashell2 >> ~/.bash_profile
-alias zappashell3='docker run -ti -e AWS_PROFILE=$AWS_PROFILE -v $(pwd):/var/task -v ~/.aws/:/root/.aws  --rm lambci/lambda:build-python3.6 bash'
-alias zappashell3 >> ~/.bash_profile
+# added by pipsi (https://github.com/mitsuhiko/pipsi)
+export PATH="/Users/dperconti/.local/bin:$PATH"
